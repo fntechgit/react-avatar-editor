@@ -146,6 +146,7 @@ class AvatarEditor extends React.Component {
     color: PropTypes.arrayOf(PropTypes.number),
     backgroundColor: PropTypes.string,
     crossOrigin: PropTypes.oneOf(['', 'anonymous', 'use-credentials']),
+    allowCrossOrigin: PropTypes.bool,
 
     onLoadFailure: PropTypes.func,
     onLoadSuccess: PropTypes.func,
@@ -462,7 +463,7 @@ class AvatarEditor extends React.Component {
         .then(this.handleImageReady)
         .catch(this.props.onLoadFailure)
     } else if (typeof image === 'string') {
-      this.loadingImage = loadImageURL(image, this.props.crossOrigin)
+      this.loadingImage = loadImageURL(image, this.props.crossOrigin, this.props.allowCrossOrigin)
         .then(this.handleImageReady)
         .catch(this.props.onLoadFailure)
     }
@@ -723,6 +724,7 @@ class AvatarEditor extends React.Component {
       // eslint-disable-next-line react/prop-types
       style,
       crossOrigin,
+      allowCrossOrigin,
       onLoadFailure,
       onLoadSuccess,
       onImageReady,
